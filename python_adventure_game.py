@@ -14,7 +14,12 @@ rooms = {
         'south': 'room3'
     },
     'room3': {
-        'description': 'You are in room 3. You found the treasure! Congratulations!',
+        'description': 'You are in room 3. You can see the treasure behind a door to your south ! Congratulations!',
+        'south': 'room4'
+        
+    }
+    'room4':{
+        'descritpion': 'You are in the last room. You collected the treasure!',
         'end': True
     }
 }
