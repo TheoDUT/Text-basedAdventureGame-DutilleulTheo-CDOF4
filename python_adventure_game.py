@@ -1,3 +1,5 @@
+import random
+
 rooms = {
     'start': {
         'description': 'You are in a dark room. Try to escape. There is a door to your north.',
@@ -15,8 +17,8 @@ rooms = {
         'east': 'room4'
     },
     'room3': {
-        'description': 'You are in room 3. There is a door to your north.',
-        'north': 'room2'
+        'description': 'You entered a trap room! Game over.',
+        'end': True
     },
     'room4': {
         'description': 'You are in room 4. There is a door to your west and a hidden passage to the north.',
@@ -32,6 +34,7 @@ rooms = {
         'end': True
     }
 }
+
 def show_room(room):
     print(room['description'])
 
@@ -63,6 +66,10 @@ current_room = rooms['start']
 
 while 'end' not in current_room:
     show_room(current_room)
+    next_room = get_action(current_room)
+    current_room = rooms[next_room]
+
+print(current_room['description'])
     next_room = get_action(current_room)
     current_room = rooms[next_room]
 
