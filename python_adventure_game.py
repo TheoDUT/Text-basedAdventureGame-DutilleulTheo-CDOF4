@@ -32,7 +32,6 @@ rooms = {
         'end': True
     }
 }
-
 def show_room(room):
     print(room['description'])
 
