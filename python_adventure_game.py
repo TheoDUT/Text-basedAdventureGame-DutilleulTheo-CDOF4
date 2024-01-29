@@ -11,10 +11,14 @@ rooms = {
         'south': 'start'
     },
     'room2': {
-        'description': 'You are in room 2. There is a door to your west, south, and east.',
+        'description': 'You are in room 2. You encounter a friendly character in the room. Choose what to do.',
         'west': 'room1',
         'south': 'room3',
-        'east': 'room4'
+        'east': 'room4',
+        'events': {
+            'Interact': 'friendly_character',
+            'Ignore': 'no_interaction'
+        }
     },
     'room3': {
         'description': 'You entered a trap room! Game over.',
@@ -59,17 +63,31 @@ def get_action(room):
             return room['south']
         elif action == 'west' and 'west' in room:
             return room['west']
+        elif 'events' in room and action in room['events']:
+            return room['events'][action]
         else:
             print('Invalid action. Try again.')
+
+def handle_event(event):
+    if event == 'friendly_character':
+        print('You encounter a friendly character in the room.')
+        choice = input('Do you want to (1) Chat with the character or (2) Ignore the character? ').strip()
+        if choice == '1':
+            print('You have a pleasant conversation with the character. They give you a small gift.')
+        elif choice == '2':
+            print('You decide to ignore the character. They shrug and continue on their way.')
+    elif event == 'no_interaction':
+        print('You choose not to interact with anything in the room and continue on your journey.')
 
 current_room = rooms['start']
 
 while 'end' not in current_room:
     show_room(current_room)
-    next_room = get_action(current_room)
-    current_room = rooms[next_room]
 
-print(current_room['description'])
+    if 'events' in current_room:
+        choice = input('Choose an option: ' + ', '.join(current_room['events'].keys()) + '\n').strip()
+        handle_event(current_room['events'][choice])
+
     next_room = get_action(current_room)
     current_room = rooms[next_room]
 
