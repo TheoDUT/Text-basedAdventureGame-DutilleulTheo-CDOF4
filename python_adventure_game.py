@@ -1,6 +1,6 @@
 rooms = {
     'start': {
-        'description': 'You are in a dark room. There is a door to your north.',
+        'description': 'You are in a dark room. Try to escape. There is a door to your north.',
         'north': 'room1'
     },
     'room1': {
@@ -9,17 +9,26 @@ rooms = {
         'south': 'start'
     },
     'room2': {
-        'description': 'You are in room 2. There is a door to your west and south.',
+        'description': 'You are in room 2. There is a door to your west, south, and east.',
         'west': 'room1',
-        'south': 'room3'
+        'south': 'room3',
+        'east': 'room4'
     },
     'room3': {
-        'description': 'You are in room 3. You can see the treasure behind a door to your south ! Congratulations!',
-        'south': 'room4'
-        
+        'description': 'You are in room 3. There is a door to your north.',
+        'north': 'room2'
     },
-    'room4':{
-        'descritpion': 'You are in the last room. You collected the treasure!',
+    'room4': {
+        'description': 'You are in room 4. There is a door to your west and a hidden passage to the north.',
+        'west': 'room2',
+        'north': 'room5'
+    },
+    'room5': {
+        'description': 'You are in room 5. You see a staircase going up to your west.',
+        'west': 'room6'
+    },
+    'room6': {
+        'description': 'Congratulations! You reached the top of the staircase. You won!',
         'end': True
     }
 }
@@ -34,6 +43,7 @@ def show_room(room):
         print('There is a door to your south.')
     if 'west' in room:
         print('There is a door to your west.')
+
 def get_action(room):
     while True:
         action = input('What do you want to do? ').lower().strip()
@@ -48,6 +58,7 @@ def get_action(room):
             return room['west']
         else:
             print('Invalid action. Try again.')
+
 current_room = rooms['start']
 
 while 'end' not in current_room:
