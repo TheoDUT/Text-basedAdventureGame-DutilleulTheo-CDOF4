@@ -1,6 +1,6 @@
 rooms = {
     'start': {
-        'description': 'You are in a dark room. There is a door to your north.',
+        'description': 'You are in a dark room. Try to escape. There is a door to your north.',
         'north': 'room1'
     },
     'room1': {
